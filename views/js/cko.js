@@ -2,7 +2,17 @@
  * On document ready.
  */
 $(document).ready(function () {
-  const $frames =
+  initCheckoutcom();
+  
+  //support module: onepagecheckoutps - v4.0.16 - PresTeamShop.com
+  $(document).on('opc-load-review:completed', function() {
+      initCheckoutcom();
+      CheckoutcomFramesPay(document.getElementById('checkoutcom-card-form'));
+  });  
+});
+
+function initCheckoutcom() {
+    const $frames =
     document.getElementById("checkoutcom-card-frame") ??
     document.getElementById("checkoutcom-multi-frame");
 
@@ -29,7 +39,7 @@ $(document).ready(function () {
       showFrames(savecard);
     }
   }
-});
+}
 
 function hideFrames(savecard) {
   $("#checkoutcom-card-frame").hide();

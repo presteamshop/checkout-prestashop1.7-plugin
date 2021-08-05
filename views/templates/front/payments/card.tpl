@@ -154,11 +154,15 @@
         /**
          * Initialize frames.
          */
-        Frames.init({
+        const paramsFrames = {
             publicKey: $frames.dataset.key,
             debug: Boolean(+$frames.dataset.debug),
             localization: $frames.dataset.lang.toUpperCase(),
-            cardholder: {
+            cardholder: {}
+        };
+
+        if (prestashop.customer.addresses.length > 0) {
+            paramsFrames.cardholder = {
                 name: prestashop.customer.addresses[$frames.dataset.billing].firstname + ' ' + prestashop.customer.addresses[$frames.dataset.billing].lastname,
                 billingAddress: {
                     addressLine1: prestashop.customer.addresses[$frames.dataset.billing].address1,
@@ -170,7 +174,9 @@
                 },
                 phone: prestashop.customer.addresses[$frames.dataset.billing].phone,
             }
-        });
+        }
+
+        Frames.init(paramsFrames);
 
         /**
          * Add card tokenization failed event.
