@@ -3,12 +3,12 @@
  */
 $(document).ready(function () {
   initCheckoutcom();
-  
-  //support module: onepagecheckoutps - v4.0.16 - PresTeamShop.com
   $(document).on('opc-load-review:completed', function() {
-      initCheckoutcom();
-      CheckoutcomFramesPay(document.getElementById('checkoutcom-card-form'));
-  });  
+      if (typeof CheckoutcomFramesPay !== typeof undefined) {
+          initCheckoutcom();
+          CheckoutcomFramesPay(document.getElementById('checkoutcom-card-form'));
+      }
+  });
 });
 
 function initCheckoutcom() {
